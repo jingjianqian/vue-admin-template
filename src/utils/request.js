@@ -44,7 +44,6 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       Message({
@@ -66,6 +65,21 @@ service.interceptors.response.use(
           })
         })
       }
+
+      if (res.code === 50000) {
+        // to re-login
+        MessageBox.confirm('用户名跟密码不匹配', 'Confirm logout', {
+          confirmButtonText: '重新登陆',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
+        })
+      }
+
+
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
