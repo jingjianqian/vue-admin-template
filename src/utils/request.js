@@ -67,7 +67,9 @@ service.interceptors.response.use(
       }
 
       if (res.code === 50000) {
-        // to re-login
+        return Promise.reject(new Error(res.message || '用户名跟密码不匹配'));
+        store.dispatch('user/resetToken').then(() => {location.reload()});
+        /*// to re-login
         MessageBox.confirm('用户名跟密码不匹配', 'Confirm logout', {
           confirmButtonText: '重新登陆',
           cancelButtonText: 'Cancel',
@@ -76,11 +78,11 @@ service.interceptors.response.use(
           store.dispatch('user/resetToken').then(() => {
             location.reload()
           })
-        })
+        })*/
       }
 
 
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.message || '用户名跟密码不匹配'))
     } else {
       return res
     }

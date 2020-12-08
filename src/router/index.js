@@ -90,6 +90,8 @@ export const constantRoutes = [
     ]
   },
 
+  
+
   {
     path: '/nested',
     component: Layout,
@@ -156,6 +158,19 @@ export const constantRoutes = [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
         meta: { title: 'External Link', icon: 'link' }
+      }
+    ]
+  },
+
+  {
+    path: '/roleManage',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/roleManage/index'),
+        meta: { title: '角色管理', icon: 'user' }
       }
     ]
   },

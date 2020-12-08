@@ -5,11 +5,11 @@ export default {
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '123123'
     },
     title: {
       type: String,
-      default: ''
+      default: '4454545'
     }
   },
   render(h, context) {
